@@ -22,7 +22,7 @@
 	<Operation Class="PatchOperationConditional">
 		<xpath>/Defs/HediffDef[defName="XenogermReplicating"]/lethalSeverity</xpath>
 		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/WorldObjectDef[defName="Caravan"]</xpath>
+			<xpath>Defs/HediffDef[defName="XenogermReplicating"]</xpath>
 			<value>
 				<lethalSeverity>2</lethalSeverity>
 			</value>
