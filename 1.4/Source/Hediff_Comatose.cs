@@ -9,14 +9,6 @@ namespace DeathRattle
 {
     public class Hediff_Comatose : HediffWithComps
     {
-        public override void ExposeData()
-        {
-            base.ExposeData();
-            /*if (cause != null) {
-                Scribe_Defs.Look(ref cause, "cause");
-            }*/
-        }
-
         public float CalcSeverityForHediff(HediffWithComps item)
         {
             float change = 0f;

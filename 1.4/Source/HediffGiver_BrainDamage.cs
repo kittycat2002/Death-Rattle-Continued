@@ -17,7 +17,7 @@ namespace DeathRattle
 
         public override void OnIntervalPassed(Pawn pawn, Hediff cause)
         {
-            if (cause.Severity < minSeverity || pawn.genes.HasGene(GeneDefOf.Deathless) || !Rand.MTBEventOccurs(baseMtbDays, 60000f, 60f))
+            if (cause.Severity < minSeverity || (pawn.genes != null && pawn.genes.HasGene(GeneDefOf.Deathless)) || !Rand.MTBEventOccurs(baseMtbDays, 60000f, 60f))
                 return;
             if (TryApply(pawn))
                 SendLetter(pawn, cause);

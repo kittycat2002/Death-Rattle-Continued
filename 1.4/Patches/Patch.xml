@@ -22,7 +22,7 @@
 	<Operation Class="PatchOperationConditional">
 		<xpath>/Defs/HediffDef[defName="XenogermReplicating"]/lethalSeverity</xpath>
 		<nomatch Class="PatchOperationAdd">
-			<xpath>Defs/WorldObjectDef[defName="Caravan"]</xpath>
+			<xpath>/Defs/HediffDef[defName="XenogermReplicating"]</xpath>
 			<value>
 				<lethalSeverity>2</lethalSeverity>
 			</value>
@@ -146,5 +146,79 @@
 			</match>
 		</match>
 	</Operation>
+
+    <Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/PawnCapacityDef[defName="Consciousness"]</xpath>
+        <value>
+            <li Class="DeathRattle.PawnCapacityDef_Extensions">
+                <hediffWhenZeroFlesh>Coma</hediffWhenZeroFlesh>
+            </li>
+        </value>
+    </Operation>
+
+	<Operation Class="PatchOperationRemove">
+        <xpath>Defs/PawnCapacityDef[defName="Consciousness"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/PawnCapacityDef[defName="Breathing"]</xpath>
+        <value>
+            <li Class="DeathRattle.PawnCapacityDef_Extensions">
+                <hediffWhenZeroFlesh>ClinicalDeathAsphyxiation</hediffWhenZeroFlesh>
+            </li>
+        </value>
+    </Operation>
+
+	<Operation Class="PatchOperationRemove">
+        <xpath>Defs/PawnCapacityDef[defName="Breathing"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationRemove">
+        <xpath>Defs/PawnCapacityDef[defName="BloodFiltration"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/PawnCapacityDef[defName="BloodPumping"]</xpath>
+        <value>
+            <li Class="DeathRattle.PawnCapacityDef_Extensions">
+                <hediffWhenZeroFlesh>ClinicalDeathNoHeartbeat</hediffWhenZeroFlesh>
+            </li>
+        </value>
+    </Operation>
+
+	<Operation Class="PatchOperationRemove">
+        <xpath>Defs/PawnCapacityDef[defName="BloodPumping"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/PawnCapacityDef[defName="Metabolism"]</xpath>
+        <value>
+            <li Class="DeathRattle.PawnCapacityDef_Extensions">
+                <hediffWhenZeroFlesh>IntestinalFailure</hediffWhenZeroFlesh>
+            </li>
+        </value>
+    </Operation>
+
+	<Operation Class="PatchOperationRemove">
+        <xpath>Defs/PawnCapacityDef[defName="Metabolism"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/BodyPartDef[defName="Kidney"]</xpath>
+        <value>
+            <li Class="DeathRattle.BodyPartDef_Extensions">
+                <hediffWhenMissing>KidneyFailure</hediffWhenMissing>
+            </li>
+        </value>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/BodyPartDef[defName="Liver"]</xpath>
+        <value>
+            <li Class="DeathRattle.BodyPartDef_Extensions">
+                <hediffWhenMissing>LiverFailure</hediffWhenMissing>
+            </li>
+        </value>
+    </Operation>
 
 </Patch>

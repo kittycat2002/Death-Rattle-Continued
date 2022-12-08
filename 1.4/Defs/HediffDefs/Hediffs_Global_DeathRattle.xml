@@ -2,7 +2,7 @@
 <Defs>
 
   <HediffDef Name="FailureBase" Abstract="True">
-    <hediffClass>DeathRattle.Hediff_DeathRattle</hediffClass>
+    <hediffClass>HediffWithComps</hediffClass>
     <defaultLabelColor>(1, 0.35, 0.35)</defaultLabelColor>
     <initialSeverity>0.001</initialSeverity>
 	<everCurableByItem>false</everCurableByItem>
@@ -16,6 +16,9 @@
     <comps>
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>0.34</severityPerDayNotImmune>
+      </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasCapacity">
+        <capacity>Metabolism</capacity>
       </li>
     </comps>
     <stages>
@@ -55,6 +58,9 @@
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>1</severityPerDayNotImmune>
       </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasPart">
+        <part>Liver</part>
+      </li>
     </comps>
     <stages>
       <li>
@@ -83,6 +89,9 @@
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>0.2</severityPerDayNotImmune>
       </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasPart">
+        <part>Kidney</part>
+      </li>
     </comps>
     <stages>
       <li>
@@ -110,6 +119,9 @@
     <comps>
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>8</severityPerDayNotImmune>
+      </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasCapacity">
+        <capacity>BloodPumping</capacity>
       </li>
     </comps>
     <stages>
@@ -156,6 +168,9 @@
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>8</severityPerDayNotImmune>
       </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasCapacity">
+        <capacity>Breathing</capacity>
+      </li>
     </comps>
     <stages>
       <li>
@@ -200,6 +215,9 @@
     <comps>
       <li Class="HediffCompProperties_Immunizable">
         <severityPerDayNotImmune>0.2</severityPerDayNotImmune>
+      </li>
+      <li Class="DeathRattle.HediffCompProperties_RemoveWhenHasCapacity">
+        <capacity>Consciousness</capacity>
       </li>
     </comps>
     <stages>
@@ -261,36 +279,6 @@
 						<capacity>Consciousness</capacity>
 						<setMax>0.1</setMax>
 					</li>
-				</capMods>
-			</li>
-		</stages>
-	</HediffDef>
-	
-	<!-- These two are legacy Hediffs, only present for save compatibility -->
-	
-	<HediffDef ParentName="ChronicDiseaseBase">
-		<defName>SevereBrainDamage</defName>
-		<label>severe brain damage</label>
-		<description>The victim has severe brain damage</description>
-		<stages>
-			<li>
-				<partEfficiencyOffset>-0.4</partEfficiencyOffset>
-			</li>
-		</stages>
-	</HediffDef>
-
-
-	<HediffDef ParentName="ChronicDiseaseBase">
-		<defName>VegetativeState</defName>
-		<label>vegetative state</label>
-		<description>The victim is in a vegetative state</description>
-		<stages>
-			<li>
-				<capMods>
-				  <li>
-					<capacity>Consciousness</capacity>
-					<setMax>0.1</setMax>
-				  </li>
 				</capMods>
 			</li>
 		</stages>
