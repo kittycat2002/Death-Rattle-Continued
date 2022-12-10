@@ -34,29 +34,35 @@ namespace DeathRattle
             harmony.PatchAll();
         }
     }
-    [HarmonyPatch(typeof(Pawn_HealthTracker), "HealthTick")]
-    public static class HealthTick_Patch
+    [HarmonyPatch(typeof(HediffSet), "DirtyCache")]
+    public static class HediffSet_DirtyCache_Patch
     {
         [HarmonyPostfix]
-        public static void HealthTick_Postfix(Pawn_HealthTracker __instance, Pawn ___pawn)
+        public static void DirtyCache_Postfix(HediffSet __instance, Pawn ___pawn)
         {
-            List<BodyPartDef> bodyPartDefs = DefDatabase<BodyPartDef>.AllDefsListForReading;
             foreach ((BodyPartDef def, HediffDef hediff) in HarmonyPatches.bodyPartDict)
             {
-                if (!__instance.hediffSet.HasHediff(hediff)) {
+                if (!__instance.HasHediff(hediff)) {
                     List<BodyPartRecord> parts = ___pawn.RaceProps.body.GetPartsWithDef(def);
-                    if (parts.Count > 0 && parts.All((p) => PawnCapacityUtility.CalculatePartEfficiency(__instance.hediffSet, p, false, null) <= 0.0001f))
+                    if (parts.Count > 0 && parts.All((p) => PawnCapacityUtility.CalculatePartEfficiency(__instance, p, false, null) <= 0.0001f))
                     {
-                        __instance.AddHediff(hediff);
+                        ___pawn.health.AddHediff(hediff);
                     }
                 }
             }
-            List<PawnCapacityDef> pawnCapacityDefs = DefDatabase<PawnCapacityDef>.AllDefsListForReading;
+        }
+    }
+    [HarmonyPatch(typeof(PawnCapacitiesHandler), "Notify_CapacityLevelsDirty")]
+    public static class PawnCapacitiesHandler_Notify_CapacityLevelsDirty_Patch
+    {
+        [HarmonyPostfix]
+        public static void Notify_CapacityLevelsDirty_Postfix(PawnCapacitiesHandler __instance, Pawn ___pawn)
+        {
             foreach ((PawnCapacityDef def, HediffDef hediff) in ___pawn.RaceProps.IsFlesh ? HarmonyPatches.capacityDictFlesh : HarmonyPatches.capacityDictMechanoid)
             {
-                if (!__instance.hediffSet.HasHediff(hediff) && !__instance.capacities.CapableOf(def))
+                if (!___pawn.health.hediffSet.HasHediff(hediff) && !__instance.CapableOf(def))
                 {
-                    __instance.AddHediff(hediff);
+                    ___pawn.health.AddHediff(hediff);
                 }
             }
         }
