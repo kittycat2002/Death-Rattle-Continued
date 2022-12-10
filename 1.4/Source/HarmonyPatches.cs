@@ -58,11 +58,14 @@ namespace DeathRattle
         [HarmonyPostfix]
         public static void Notify_CapacityLevelsDirty_Postfix(PawnCapacitiesHandler __instance, Pawn ___pawn)
         {
-            foreach ((PawnCapacityDef def, HediffDef hediff) in ___pawn.RaceProps.IsFlesh ? HarmonyPatches.capacityDictFlesh : HarmonyPatches.capacityDictMechanoid)
+            if (Scribe.mode != LoadSaveMode.LoadingVars)
             {
-                if (!___pawn.health.hediffSet.HasHediff(hediff) && !__instance.CapableOf(def))
+                foreach ((PawnCapacityDef def, HediffDef hediff) in ___pawn.RaceProps.IsFlesh ? HarmonyPatches.capacityDictFlesh : HarmonyPatches.capacityDictMechanoid)
                 {
-                    ___pawn.health.AddHediff(hediff);
+                    if (!___pawn.health.hediffSet.HasHediff(hediff) && !__instance.CapableOf(def))
+                    {
+                        ___pawn.health.AddHediff(hediff);
+                    }
                 }
             }
         }
