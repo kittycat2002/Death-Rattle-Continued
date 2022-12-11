@@ -7,6 +7,7 @@ using Verse;
 using HarmonyLib;
 using RimWorld;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace DeathRattle
 {
@@ -74,14 +75,14 @@ namespace DeathRattle
     public static class ShouldBeDead
     {
         [HarmonyPostfix]
-        public static bool ShouldBeDead_Postfix(bool __result, Pawn_HealthTracker __instance)
+        public static bool ShouldBeDead_Postfix(bool __result, Pawn_HealthTracker __instance, Pawn ___pawn)
         {
             if (__result == true)
             {
                 return true;
             }
-            BodyPartRecord brain = __instance.hediffSet.GetBrain();
-            if (brain == null || __instance.hediffSet.PartIsMissing(brain) || __instance.hediffSet.GetPartHealth(brain) <= 0.0001f)
+            List<BodyPartRecord> parts = ___pawn.RaceProps.body.GetPartsWithTag(BodyPartTagDefOf.ConsciousnessSource);
+            if (parts.Count > 0 && parts.Any((p) => __instance.hediffSet.PartIsMissing(p) || __instance.hediffSet.GetPartHealth(p) <= 0.0001f))
             {
                 return true;
             }
