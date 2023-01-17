@@ -47,4 +47,17 @@ namespace DeathRattle
             compClass = typeof(HediffComp_RemoveWhenHasPart);
         }
     }
+    public class HediffComp_TendSeverity : HediffComp
+    {
+        public HediffCompProperties_TendSeverity Props => (HediffCompProperties_TendSeverity)props;
+        public float MaxSeverity => Props.maxSeverity;
+    }
+    public class HediffCompProperties_TendSeverity : HediffCompProperties
+    {
+        public float maxSeverity;
+        public HediffCompProperties_TendSeverity()
+        {
+            compClass = typeof(HediffComp_TendSeverity);
+        }
+    }
 }

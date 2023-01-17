@@ -1,6 +1,0 @@
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\1.4\Assemblies\DeathRattle.dll
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\1.4\Assemblies\DeathRattle.pdb
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\Source\obj\Debug\DeathRattle.csproj.AssemblyReference.cache
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\Source\obj\Debug\DeathRattle.csproj.CoreCompileInputs.cache
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\Source\obj\Debug\DeathRattle.dll
-G:\SteamLibrary\steamapps\common\RimWorld\Mods\Death-Rattle-Continued\1.4\Assemblies\DeathRattle.dll

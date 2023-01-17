@@ -72,7 +72,7 @@ namespace DeathRattle
         }
     }
     [HarmonyPatch(typeof(Pawn_HealthTracker), "ShouldBeDead")]
-    public static class ShouldBeDead
+    public static class ShouldBeDead_Patch
     {
         [HarmonyPostfix]
         public static bool ShouldBeDead_Postfix(bool __result, Pawn_HealthTracker __instance, Pawn ___pawn)
@@ -87,6 +87,20 @@ namespace DeathRattle
                 return true;
             }
             return false;
+        }
+    }
+    [HarmonyPatch(typeof(Hediff), "TendableNow")]
+    public static class TendableNow_Patch
+    {
+        [HarmonyPrefix]
+        public static bool TendableNow_Prefix(ref bool __result, Hediff __instance)
+        {
+            HediffComp_TendSeverity comp = __instance.TryGetComp<HediffComp_TendSeverity>();
+            if (comp != null && __instance.Severity >= comp.MaxSeverity) {
+                __result = false;
+                return false;
+            }
+            return true;
         }
     }
 }

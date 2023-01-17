@@ -221,4 +221,42 @@
         </value>
     </Operation>
 
+	<Operation Class="PatchOperationRemove">
+        <xpath>/Defs/HediffDef[defName="HeartAttack"]/lethalSeverity</xpath>
+	</Operation>
+
+	<Operation Class="PatchOperationAdd">
+        <xpath>/Defs/HediffDef[defName="HeartAttack"]/stages/li[last()]</xpath>
+		<value>
+        	<capMods>
+          		<li>
+            		<capacity>BloodPumping</capacity>
+            		<setMax>0</setMax>
+          		</li>
+        	</capMods>
+		</value>
+	</Operation>
+
+	<Operation Class="PatchOperationConditional">
+  		<xpath>/Defs/HediffDef[defName="HeartAttack"]/comps</xpath>
+  		<nomatch Class="PatchOperationAdd">
+    		<xpath>/Defs/HediffDef[defName="HeartAttack"]</xpath>
+    		<value>
+      			<comps>
+            		<li Class="DeathRattle.HediffCompProperties_TendSeverity">
+                		<maxSeverity>1</maxSeverity>
+            		</li>
+      			</comps>
+    		</value>
+  		</nomatch>
+  		<match Class="PatchOperationAdd">
+    		<xpath>/Defs/HediffDef[defName="HeartAttack"]/comps</xpath>
+    		<value>
+            	<li Class="DeathRattle.HediffCompProperties_TendSeverity">
+                	<maxSeverity>1</maxSeverity>
+           		</li>
+    		</value>
+  		</match>
+</Operation>
+
 </Patch>
