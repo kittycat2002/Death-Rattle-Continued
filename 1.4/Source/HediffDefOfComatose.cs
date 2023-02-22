@@ -7,5 +7,11 @@ namespace DeathRattle
     public static class HediffDefOfComatose
     {
         public static HediffDef ArtificialComa;
+
+        static HediffDefOfComatose()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(HediffDefOfComatose));
+        }
     }
+
 }

@@ -12,5 +12,9 @@ namespace DeathRattle
         public static HediffDef ClinicalDeathNoHeartbeat;
         public static HediffDef ClinicalDeathAsphyxiation;
         public static HediffDef Coma;
+        static HediffDefOfDeathRattle()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(HediffDefOfDeathRattle));
+        }
     }
 }

@@ -7,5 +7,10 @@ namespace DeathRattle
     public static class RecipeDefOfComatose
     {
         public static RecipeDef ArtificialComa;
+
+        static RecipeDefOfComatose()
+        {
+            DefOfHelper.EnsureInitializedInCtor(typeof(RecipeDefOfComatose));
+        }
     }
 }

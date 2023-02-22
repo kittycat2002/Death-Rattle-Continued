@@ -19,18 +19,12 @@ namespace DeathRattle
         public static Dictionary<PawnCapacityDef, HediffDef> capacityDictMechanoid = new Dictionary<PawnCapacityDef, HediffDef>();
         static HarmonyPatches()
         {
-            foreach (BodyPartDef def in DefDatabase<BodyPartDef>.AllDefsListForReading.Where((d) => d.HasModExtension<BodyPartDef_Extensions>()))
-            {
-                bodyPartDict.Add(def, def.GetModExtension<BodyPartDef_Extensions>().hediffWhenMissing);
-            }
-            foreach (PawnCapacityDef def in DefDatabase<PawnCapacityDef>.AllDefsListForReading.Where((d) => d.HasModExtension<PawnCapacityDef_Extensions>()))
-            {
-                PawnCapacityDef_Extensions ext = def.GetModExtension<PawnCapacityDef_Extensions>();
-                if (ext.hediffWhenZeroFlesh != null)
-                    capacityDictFlesh.Add(def, ext.hediffWhenZeroFlesh);
-                if (ext.hediffWhenZeroMechanoid != null)
-                    capacityDictFlesh.Add(def, ext.hediffWhenZeroMechanoid);
-            }
+            bodyPartDict = DefDatabase<BodyPartDef>.AllDefsListForReading.Where((def) => def.HasModExtension<BodyPartDef_Extensions>())
+                                                                         .ToDictionary(def => def ,def => def.GetModExtension<BodyPartDef_Extensions>().hediffWhenMissing);
+            capacityDictFlesh = DefDatabase<PawnCapacityDef>.AllDefsListForReading.Where(def => def.GetModExtension<PawnCapacityDef_Extensions>()?.hediffWhenZeroFlesh != null)
+                                                                                  .ToDictionary(def => def, def => def.GetModExtension<PawnCapacityDef_Extensions>().hediffWhenZeroFlesh);
+            capacityDictMechanoid = DefDatabase<PawnCapacityDef>.AllDefsListForReading.Where(def => def.GetModExtension<PawnCapacityDef_Extensions>()?.hediffWhenZeroMechanoid != null)
+                                                                                      .ToDictionary(def => def, def => def.GetModExtension<PawnCapacityDef_Extensions>().hediffWhenZeroMechanoid);
             var harmony = new Harmony("cat2002.deathrattle");
             harmony.PatchAll();
         }
@@ -41,6 +35,8 @@ namespace DeathRattle
         [HarmonyPostfix]
         public static void DirtyCache_Postfix(HediffSet __instance, Pawn ___pawn)
         {
+            if (___pawn.health.ShouldBeDead())
+                return;
             foreach ((BodyPartDef def, HediffDef hediff) in HarmonyPatches.bodyPartDict)
             {
                 if (!__instance.HasHediff(hediff)) {
@@ -61,6 +57,8 @@ namespace DeathRattle
         {
             if (Scribe.mode != LoadSaveMode.LoadingVars)
             {
+                if (___pawn.health.ShouldBeDead())
+                    return;
                 foreach ((PawnCapacityDef def, HediffDef hediff) in ___pawn.RaceProps.IsFlesh ? HarmonyPatches.capacityDictFlesh : HarmonyPatches.capacityDictMechanoid)
                 {
                     if (!___pawn.health.hediffSet.HasHediff(hediff) && !__instance.CapableOf(def))
@@ -77,12 +75,12 @@ namespace DeathRattle
         [HarmonyPostfix]
         public static bool ShouldBeDead_Postfix(bool __result, Pawn_HealthTracker __instance, Pawn ___pawn)
         {
-            if (__result == true)
+            if (__result)
             {
                 return true;
             }
             List<BodyPartRecord> parts = ___pawn.RaceProps.body.GetPartsWithTag(BodyPartTagDefOf.ConsciousnessSource);
-            if (parts.Count > 0 && parts.Any((p) => __instance.hediffSet.PartIsMissing(p) || __instance.hediffSet.GetPartHealth(p) <= 0.0001f))
+            if (parts.Count > 0 && parts.All((p) => __instance.hediffSet.PartIsMissing(p) || __instance.hediffSet.GetPartHealth(p) <= 0.0001f))
             {
                 return true;
             }
