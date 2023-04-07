@@ -19,14 +19,19 @@
 		</operations>
 	</Operation>
 
-	<Operation Class="PatchOperationConditional">
-		<xpath>/Defs/HediffDef[defName="XenogermReplicating"]/lethalSeverity</xpath>
-		<nomatch Class="PatchOperationAdd">
-			<xpath>/Defs/HediffDef[defName="XenogermReplicating"]</xpath>
-			<value>
-				<lethalSeverity>2</lethalSeverity>
-			</value>
-		</nomatch>
+	<Operation Class="PatchOperationFindMod">
+		<mods>
+			<li>Biotech</li>
+		</mods>
+		<match Class="PatchOperationConditional" MayRequire="Ludeon.Rimworld.Biotech">
+			<xpath>/Defs/HediffDef[defName="XenogermReplicating"]/lethalSeverity</xpath>
+			<nomatch Class="PatchOperationAdd">
+				<xpath>/Defs/HediffDef[defName="XenogermReplicating"]</xpath>
+				<value>
+					<lethalSeverity>2</lethalSeverity>
+				</value>
+			</nomatch>
+		</match>
 	</Operation>
 
 	<Operation Class="PatchOperationFindMod">
@@ -225,16 +230,28 @@
         <xpath>/Defs/HediffDef[defName="HeartAttack"]/lethalSeverity</xpath>
 	</Operation>
 
-	<Operation Class="PatchOperationAdd">
-        <xpath>/Defs/HediffDef[defName="HeartAttack"]/stages/li[last()]</xpath>
-		<value>
-        	<capMods>
+	<Operation Class="PatchOperationConditional">
+        <xpath>/Defs/HediffDef[defName="HeartAttack"]/stages/li[last()]/capMods</xpath>
+		<nomatch Class="PatchOperationAdd">
+        	<xpath>/Defs/HediffDef[defName="HeartAttack"]/stages/li[last()]</xpath>
+			<value>
+        		<capMods>
+          			<li>
+            			<capacity>BloodPumping</capacity>
+            			<setMax>0</setMax>
+          			</li>
+        		</capMods>
+			</value>
+  		</nomatch>
+  		<match Class="PatchOperationAdd">
+    		<xpath>/Defs/HediffDef[defName="HeartAttack"]/stages/li[last()]/capMods</xpath>
+    		<value>
           		<li>
             		<capacity>BloodPumping</capacity>
             		<setMax>0</setMax>
           		</li>
-        	</capMods>
-		</value>
+    		</value>
+  		</match>
 	</Operation>
 
 	<Operation Class="PatchOperationConditional">
@@ -257,6 +274,6 @@
            		</li>
     		</value>
   		</match>
-</Operation>
+	</Operation>
 
 </Patch>
