@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+	<HediffDef Name="ComatoseBase" Abstract="True">
+		<hediffClass>DeathRattle.Hediff_Comatose</hediffClass>
+		<defaultLabelColor>(1, 0.35, 0.35)</defaultLabelColor>
+		<initialSeverity>0.001</initialSeverity>
+		<everCurableByItem>true</everCurableByItem>
+	</HediffDef>
+
+  
+	<HediffDef ParentName="ComatoseBase">
+		<defName>ArtificialComa</defName>
+		<label>artificial coma</label>
+		<description>The victim is in an artificial coma</description>
+		<lethalSeverity>1</lethalSeverity>
+		<comps>
+			<li Class="HediffCompProperties_Immunizable">
+				<severityPerDayNotImmune>0.1</severityPerDayNotImmune>
+			</li>
+		</comps>
+		<stages>
+			<li>
+				<lifeThreatening>false</lifeThreatening>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<label>dangerous</label>
+				<minSeverity>0.70</minSeverity>
+				<lifeThreatening>true</lifeThreatening>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+			</li>
+			<li>
+				<label>life threatening</label>
+				<minSeverity>0.80</minSeverity>
+				<lifeThreatening>true</lifeThreatening>
+				<capMods>
+					<li>
+						<capacity>Consciousness</capacity>
+						<setMax>0.1</setMax>
+					</li>
+				</capMods>
+			</li>
+		</stages>
+		<hediffGivers>
+			<li Class="DeathRattle.HediffGiver_BrainDamage">
+				<hediff>BrainDamage</hediff>
+				<minSeverity>0.72</minSeverity>
+				<baseMtbDays>0.17</baseMtbDays>
+				<severityAmount>0.05</severityAmount>
+				<partsToAffect>
+					<li>Brain</li>
+				</partsToAffect>
+			</li>
+		</hediffGivers>
+	</HediffDef>
+</Defs>
