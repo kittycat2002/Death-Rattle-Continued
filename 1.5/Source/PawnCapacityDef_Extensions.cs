@@ -1,10 +1,4 @@
-﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Verse;
+﻿using Verse;
 
 namespace DeathRattle
 {
@@ -12,5 +6,7 @@ namespace DeathRattle
     {
         public HediffDef hediffWhenZeroFlesh;
         public HediffDef hediffWhenZeroMechanoid;
+        public bool lethalFleshWhenHediffDisabled;
+        public bool lethalMechanoidWhenHediffDisabled;
     }
 }

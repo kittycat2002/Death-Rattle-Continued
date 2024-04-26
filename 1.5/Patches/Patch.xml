@@ -157,6 +157,7 @@
         <value>
             <li Class="DeathRattle.PawnCapacityDef_Extensions">
                 <hediffWhenZeroFlesh>Coma</hediffWhenZeroFlesh>
+				<lethalFleshWhenHediffDisabled>true</lethalFleshWhenHediffDisabled>
             </li>
         </value>
     </Operation>
@@ -170,12 +171,22 @@
         <value>
             <li Class="DeathRattle.PawnCapacityDef_Extensions">
                 <hediffWhenZeroFlesh>ClinicalDeathAsphyxiation</hediffWhenZeroFlesh>
+				<lethalFleshWhenHediffDisabled>true</lethalFleshWhenHediffDisabled>
             </li>
         </value>
     </Operation>
 
 	<Operation Class="PatchOperationRemove">
         <xpath>Defs/PawnCapacityDef[defName="Breathing"]/lethalFlesh</xpath>
+    </Operation>
+
+	<Operation Class="PatchOperationAddModExtension">
+        <xpath>Defs/PawnCapacityDef[defName="BloodFiltration"]</xpath>
+        <value>
+            <li Class="DeathRattle.PawnCapacityDef_Extensions">
+				<lethalFleshWhenHediffDisabled>true</lethalFleshWhenHediffDisabled>
+            </li>
+        </value>
     </Operation>
 
 	<Operation Class="PatchOperationRemove">
@@ -187,6 +198,7 @@
         <value>
             <li Class="DeathRattle.PawnCapacityDef_Extensions">
                 <hediffWhenZeroFlesh>ClinicalDeathNoHeartbeat</hediffWhenZeroFlesh>
+				<lethalFleshWhenHediffDisabled>true</lethalFleshWhenHediffDisabled>
             </li>
         </value>
     </Operation>
@@ -200,6 +212,7 @@
         <value>
             <li Class="DeathRattle.PawnCapacityDef_Extensions">
                 <hediffWhenZeroFlesh>IntestinalFailure</hediffWhenZeroFlesh>
+				<lethalFleshWhenHediffDisabled>true</lethalFleshWhenHediffDisabled>
             </li>
         </value>
     </Operation>

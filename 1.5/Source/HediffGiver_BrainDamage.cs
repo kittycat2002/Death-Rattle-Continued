@@ -1,11 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using RimWorld;
 using Verse;
-using System.Threading.Tasks;
-using RimWorld;
 
 namespace DeathRattle
 {
@@ -13,7 +7,7 @@ namespace DeathRattle
     static class LifeSupportChecker
     {
         public static readonly bool hasLifeSupport = false;
-        private static HediffDef hediffDef;
+        private static readonly HediffDef hediffDef;
         static LifeSupportChecker()
         {
             if (ModsConfig.IsActive("Troopersmith1.LifeSupport"))
@@ -23,7 +17,7 @@ namespace DeathRattle
             }
         }
         public static bool HasLifeSupport(Pawn pawn) { return pawn.health.hediffSet.HasHediff(hediffDef); }
-}
+    }
     public class HediffGiver_BrainDamage : HediffGiver
     {
         public float minSeverity;
