@@ -1,3 +1,7 @@
 .vs
 obj
 bin
+_PublisherPlus.xml
+.idea
+*.dll
+*.pdb

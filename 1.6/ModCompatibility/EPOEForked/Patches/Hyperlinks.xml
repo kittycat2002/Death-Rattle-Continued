@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Patch>
+    <Operation Class="PatchOperationAdd">
+        <xpath>/Defs/ThingDef[defName="NeurocureFramework"]/descriptionHyperlinks</xpath>
+        <value>
+            <RecipeDef>EPOE_SurgeryRemoveDRBrainDamage</RecipeDef>
+        </value>
+    </Operation>
+</Patch>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<Defs>
+    <RecipeDef ParentName="EPIA_SurgerySyntheticRepair">
+        <defName>EPOE_SurgeryRemoveDRBrainDamage</defName>
+        <label>heal brain damage</label>
+        <description>Install a neuro-cure framework to treat brain damage.</description>
+        <descriptionHyperlinks>
+            <ThingDef>NeurocureFramework</ThingDef>
+            <HediffDef>BrainDamage</HediffDef>
+        </descriptionHyperlinks>
+        <jobString>Treating brain damage.</jobString>
+        <removesHediff>BrainDamage</removesHediff>
+        <successfullyRemovedHediffMessage>{0} has successfully treated {1}'s brain damage.</successfullyRemovedHediffMessage>
+        <surgerySuccessChanceFactor>0.75</surgerySuccessChanceFactor>
+        <deathOnFailedSurgeryChance>0.05</deathOnFailedSurgeryChance>
+        <workerClass>Recipe_RemoveHediff</workerClass>
+        <workAmount>3000</workAmount>
+        <ingredients>
+            <li>
+                <filter>
+                    <categories>
+                        <li>Medicine</li>
+                    </categories>
+                </filter>
+                <count>3</count>
+            </li>
+            <li>
+                <filter>
+                    <thingDefs>
+                        <li>NeurocureFramework</li>
+                    </thingDefs>
+                </filter>
+                <count>1</count>
+            </li>
+        </ingredients>
+        <fixedIngredientFilter>
+            <categories>
+                <li>Medicine</li>
+            </categories>
+            <thingDefs>
+                <li>NeurocureFramework</li>
+            </thingDefs>
+        </fixedIngredientFilter>
+        <skillRequirements>
+            <Medicine>13</Medicine>
+        </skillRequirements>
+        <appliedOnFixedBodyParts>
+            <li>Brain</li>
+        </appliedOnFixedBodyParts>
+        <researchPrerequisite>BrainSurgery</researchPrerequisite>
+    </RecipeDef>
+</Defs>
