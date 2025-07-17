@@ -31,5 +31,6 @@ Includes a patch for EPOE: Forked so that the Neuro-Cure can be used to repair B
 	</modDependencies>
 	<loadAfter>
 		<li>brrainz.harmony</li>
+		<li>vat.epoeforked</li>
 	</loadAfter>
 </ModMetaData>
